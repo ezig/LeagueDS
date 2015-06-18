@@ -1,1 +1,30 @@
-Hi noer :3
+Information
+
+
+Riot API (https://developer.riotgames.com/api/methods#!/978)
+-We’ll use summoner-v1.4 to get the summoner ID
+-We’ll use matchhistory-v2.2 to obtain the match history URI, which contains the account ID
+
+Riot’s official match history page (http://matchhistory.na.leagueoflegends.com/en/#page/landing-page)
+
+Example URL: https://acs.leagueoflegends.com/v1/stats/player_history/NA/32427899?begIndex=0&endIndex=20 (GOD BLESS JSONPRETTYPRINT.COM)
+-The 8 digit number is the account ID which we’ll get from the riot API
+-For automation, we’ll have to change the “begIndex” and “endIndex”
+-The maximum range is 20
+
+Important fields of information:
+-queueID (4 = ranked solo, 41 = ranked team)
+-game duration
+-win/loss
+-KDA
+-killing spree info.
+-Damage dealt to champs
+-minions killed
+-crowd control dealt
+-“firsts”
+-warding/vision control
+-CS per 10 and gold per 10
+-role and lane
+
+MMR (http://na.op.gg/summoner/ajax/mmr.json/userName=NME%20flaresz%20x)
+-Just need to replace the name to get the APPROXIMATE MMR and the MMR of the person’s league
