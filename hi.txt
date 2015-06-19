@@ -1,5 +1,11 @@
 Information
-
+Make sure you have the following libraries:
+lxml
+ast
+requests
+urllib
+urllib2
+simplejson
 
 Riot API (https://developer.riotgames.com/api/methods#!/978)
 -We’ll use summoner-v1.4 to get the summoner ID
