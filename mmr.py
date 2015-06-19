@@ -15,4 +15,5 @@ def url_gen(name):
 def mmr_return(name):
 	page = requests.get(url_gen(name))
 	temp = ast.literal_eval(page.content)
-	return temp['mmr']
+	mmr = temp['mmr'].replace(',','')
+	return int(mmr)
