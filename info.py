@@ -1,6 +1,15 @@
 import history
 # TODO: kills, damage to champs, gold earned, damage taken?, crowd control dealt, vision, firsts
 
+def gameids(name):
+	urls = history.url_gen3(name)
+	ids = []
+	for i in range(0,len(urls)):
+		data = history.data_gen(urls[i])
+		for item in data['games']['games']:
+			ids.append(item['gameId'])
+	return ids
+
 def duration(name):
 	urls = history.url_gen3(name)
 	duration = {}
