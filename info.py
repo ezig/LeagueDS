@@ -1,5 +1,5 @@
 import history
-# TODO: kills, damage to champs, gold earned, damage taken?, crowd control dealt, vision, firsts
+# TODO: kills, damage to champs, damage taken?, crowd control dealt, vision, firsts
 
 def gameids(name):
 	urls = history.url_gen3(name)
@@ -34,6 +34,14 @@ def winloss(name):
 		for item in data['games']['games']:
 			win_loss[item['gameId']] = item['participants'][0]['stats']['win']
 	return win_loss
+
+def winloss_ratio(name):
+	win_loss = winloss(name).values()
+	wins = 0
+	for item in win_loss:
+		if item == True:
+			wins += 1
+	return round(float(wins)/float(len(win_loss)),4)
 
 def kda_per_game(name):
 	urls = history.url_gen3(name)
@@ -78,8 +86,43 @@ def role_and_lane(name):
 			rolelane[item['gameId']] = game
 	return rolelane
 
+def gold_per_game(name):
+	urls = history.url_gen3(name)
+	gold = {}
+	for i in range(0,len(urls)):
+		data = history.data_gen(urls[i])
+		for item in data['games']['games']:
+			game_gold = {}
+			game_gold['goldEarned'] = item['participants'][0]['stats']['goldEarned']
+			game_gold['goldSpent'] = item['participants'][0]['stats']['goldSpent']
+			gold[item['gameId']] = game_gold
+	return gold		
 
+def average_gold(name):
+	golds = gold_per_game(name).values()
+	overall = {'goldEarned': 0, 'goldSpent': 0}
+	for i in range(0,len(golds)):
+		overall['goldEarned'] = overall['goldEarned'] + golds[i]['goldEarned']
+		overall['goldSpent'] = overall['goldSpent'] + golds[i]['goldSpent']
+	overall['goldEarned'] = round(float(overall['goldEarned'])/float(len(golds)),2)
+	overall['goldSpent'] = round(float(overall['goldSpent'])/float(len(golds)),2)
+	return overall
 
+def cc_per_game(name):
+	urls = history.url_gen3(name)
+	cc = {}
+	for i in range(0,len(urls)):
+		data = history.data_gen(urls[i])
+		for item in data['games']['games']:
+			cc[item['gameId']] = round(float(item['participants'][0]['stats']['totalTimeCrowdControlDealt'])/60.,2)
+	return cc		
+
+def average_cc(name):
+	ccs = cc_per_game(name).values()
+	time = 0.
+	for item in ccs:
+		time += item
+	return round(time/float(len(ccs)),2)
 
 
 
