@@ -3,17 +3,13 @@ import pickle
 
 def cleaner():
 	with open("temp.txt", "r") as f:
-	   		content = f.read().splitlines()   		
-	f.close()
+	   		content = f.read().splitlines()
 
-	temp = []
-	for item in content:
-		temp.append(item.replace('\t', ' '))
+	# split each item into [champion, ID]
+	content = map(lambda s: s.split('\t'), content)
 
-	champions = {}
-	for item in temp:
-		champ_id = item.split()
-		champions[champ_id[-1]] =  ' '.join(champ_id[:-1])
+	# create dictionary of champion ID's to names
+	champions = {champ[1] : champ[0] for champ in content}
 
 	# used pickle for convenience of storing dict
 	pickle.dump(champions,open('champions.p','wb'))
