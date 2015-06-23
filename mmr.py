@@ -1,7 +1,7 @@
 from lxml import html
 import ast 
 import requests
-import urllib
+import urllib2
 
 # name has to be a string
 def url_gen(name):
@@ -15,5 +15,11 @@ def url_gen(name):
 def mmr_return(name):
 	page = requests.get(url_gen(name))
 	temp = ast.literal_eval(page.content)
-	mmr = temp['mmr'].replace(',','')
-	return int(mmr)
+	if 'error' in temp.keys():
+		return None
+	else:	
+		mmr = temp['mmr'].replace(',','')
+		return int(mmr)
+
+	# 	2(name))
+	# data = simplejson.load(json_obj)

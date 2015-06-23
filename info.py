@@ -10,7 +10,6 @@ def gameids(name):
 			ids.append(item['gameId'])
 	return ids
 
-# TODO: write another program that creates a dictionary of champId to champ
 def champions(name):
 	ids = pickle.load(open('champions.p','rb'))
 	urls = history.url_gen3(name)
@@ -82,7 +81,7 @@ def overall_kda(name):
 			KDA['kills'] = KDA['kills'] + item['participants'][0]['stats']['kills']
 			KDA['deaths'] = KDA['deaths'] + item['participants'][0]['stats']['deaths']
 			KDA['assists'] = KDA['assists'] + item['participants'][0]['stats']['assists']
-	return KDA, round((float(KDA['kills']) + float(KDA['assists']))/float(KDA['deaths']),2)
+	return KDA
 
 
 def role_and_lane(name):
