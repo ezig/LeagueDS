@@ -9,7 +9,7 @@ def gamecount(name):
 	data = data_gen(URL)
 	return data['games']['gameCount']
 
-
+# queue = 04 is soloqueue, queue = 42 is team
 def url_gen3(name):
 	URI = api.accountID(name)
 	count = gamecount(name)
@@ -24,7 +24,7 @@ def url_gen3(name):
 			end = temp[i+1]
 		else:
 			end = count
-		URLS.append("https://acs.leagueoflegends.com" + URI + "?begIndex=" + str(start) + "&endIndex=" + str(end))
+		URLS.append("https://acs.leagueoflegends.com" + URI + "?begIndex=" + str(start) + "&endIndex=" + str(end) +"&queue=04")
 	return URLS	
 
 def data_gen(url):
