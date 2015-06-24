@@ -2,7 +2,7 @@ import history
 import pickle
 
 def gameids(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	ids = []
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -12,7 +12,7 @@ def gameids(name):
 
 def champions(name):
 	ids = pickle.load(open('champions.p','rb'))
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	champs = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -21,7 +21,7 @@ def champions(name):
 	return champs		
 
 def duration(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	duration = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -37,7 +37,7 @@ def average_duration(name):
 	return round(total/float(len(durations)),2)
 
 def winloss(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	win_loss = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -54,7 +54,7 @@ def winloss_ratio(name):
 	return round(float(wins)/float(len(win_loss)),4)
 
 def kda_per_game(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	KDA = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -73,7 +73,7 @@ def kda_per_game(name):
 
 
 def overall_kda(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	KDA = {'kills': 0, 'assists': 0, 'deaths': 0}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -85,7 +85,7 @@ def overall_kda(name):
 
 
 def role_and_lane(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	rolelane = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -97,7 +97,7 @@ def role_and_lane(name):
 	return rolelane
 
 def gold_per_game(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	gold = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -119,7 +119,7 @@ def average_gold(name):
 	return overall
 
 def cc_per_game(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	cc = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -135,7 +135,7 @@ def average_cc(name):
 	return round(time/float(len(ccs)),2)
 
 def vision_per_game(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	vision = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -157,7 +157,7 @@ def average_vision(name):
 	return overall
 
 def kills_per_game(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	kills = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -177,7 +177,7 @@ def kills_per_game(name):
 
 
 def turrets_inhibitors_per_game(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	turrets_inhibitors = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -200,7 +200,7 @@ def average_ti(name):
 
 # dealt to champions
 def damage_dealt_per_game(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	damage = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -229,7 +229,7 @@ def average_dd(name):
 
 # damage taken overall (minions, neutrals, champs)
 def damage_taken_per_game(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	damage = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -257,7 +257,7 @@ def average_dt(name):
 	return overall
 
 def minions_per_game(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	minions = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -274,7 +274,7 @@ def average_minions(name):
 	return overall
 
 def neutrals_per_game(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	neutrals = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -301,7 +301,7 @@ def average_neutrals(name):
 
 # this'll be kinda hard to use
 def perten_per_game(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	diffs = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])
@@ -318,7 +318,7 @@ def perten_per_game(name):
 # so yeah, the RIOT api is busted up in terms of first blood assist and anything related to first inhibitor takes
 # idk how valuable this is anymore
 def firsts(name):
-	urls = history.url_gen3(name)
+	urls = history.gen_urls(name)
 	first = {}
 	for i in range(0,len(urls)):
 		data = history.data_gen(urls[i])

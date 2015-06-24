@@ -10,7 +10,7 @@ def gamecount(name):
 
 matches_per_url = 20
 # queue = 04 is soloqueue, queue = 42 is team
-def url_gen(name):
+def gen_urls(name):
 	uri = api.accountID(name)
 	count = gamecount(name)
 
