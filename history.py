@@ -1,7 +1,6 @@
-import urllib2
-import simplejson
+import requests
+
 import api
-import numpy
 
 def gamecount(name):
 	URI = api.accountID(name)
@@ -9,25 +8,25 @@ def gamecount(name):
 	data = data_gen(URL)
 	return data['games']['gameCount']
 
+matches_per_url = 20
 # queue = 04 is soloqueue, queue = 42 is team
-def url_gen3(name):
-	URI = api.accountID(name)
+def url_gen(name):
+	uri = api.accountID(name)
 	count = gamecount(name)
-	temp = numpy.arange(0,count,20).tolist()
-	URLS = []
-	for i in range(0, len(temp)):
-		if i != 0:
-			start = temp[i]
-		else:
-			start = temp[i]
-		if i != len(temp) - 1:
-			end = temp[i+1]
-		else:
-			end = count
-		URLS.append("https://acs.leagueoflegends.com" + URI + "?begIndex=" + str(start) + "&endIndex=" + str(end) +"&queue=04")
-	return URLS	
+
+	urls = []
+	# count up from 0 to count by matches_per_url
+	for start in range(0, count, matches_per_url):
+		# make sure not to go over the max number of counts
+		end = min(start + matches_per_url, count)
+
+		# if count % matches_per_url = 0, we could have the case where
+		# start = end, which would not get any games that the previous 
+		# url didn't already cover
+		if start != end:
+			urls.append("https://acs.leagueoflegends.com" + uri + "?begIndex=" + str(start) + "&endIndex=" + str(end) +"&queue=04")
+
+	return urls	
 
 def data_gen(url):
-	json_obj = urllib2.urlopen(url)
-	data = simplejson.load(json_obj)
-	return data
+	return requests.get(url).json()
