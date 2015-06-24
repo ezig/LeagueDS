@@ -17,5 +17,3 @@ def mmr_return(name):
 	else:	
 		mmr = response['mmr'].replace(',','')
 		return int(mmr)
-
-print mmr_return("Valos4")
